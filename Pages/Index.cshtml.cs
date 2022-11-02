@@ -16,4 +16,14 @@ public class IndexModel : PageModel
     {
 
     }
+
+    public IActionResult OnPost()
+    {
+        Stream stream = null;
+
+        if (stream == null)
+            return NotFound(); // returns a NotFoundResult with Status404NotFound response.
+
+        return File(stream, "application/octet-stream"); // returns a FileStreamResult
+    }
 }

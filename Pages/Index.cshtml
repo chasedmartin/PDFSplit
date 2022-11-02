@@ -4,7 +4,10 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center mb-3">
-    <label for="formFile" class="form-label">Upload your PDF:</label>
-    <input class="form-control" type="file" id="formFile">
+<div class="text-center col-mid-6 mb-3">
+    <form asp-action="SplitFile" method="post">
+        <label for="formFile" class="form-label">Upload your PDF:</label>
+        <input class="form-control" type="file" id="formFile">
+        <input class="btn btn-primary" type="submit" value="Split PDF" />
+    </form>
 </div>
