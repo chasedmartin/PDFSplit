@@ -8,13 +8,15 @@ class Program
         // find all pdf documents in current folder
         var currentPath = Directory.GetCurrentDirectory();
         var pdfFiles = Directory.GetFiles(currentPath, "*.pdf");
-            
-        foreach(var file in pdfFiles){
+
+        foreach (var file in pdfFiles)
+        {
             PdfDocument pdf = PdfReader.Open(file, PdfDocumentOpenMode.Import);
 
             string name = Path.GetFileNameWithoutExtension(file);
+            string directoryName = name + "_" + @DateTime.Now.ToString("dd_MM_yyyy");
             // create containing folders for output
-            System.IO.Directory.CreateDirectory(name);
+            System.IO.Directory.CreateDirectory(directoryName);
 
             List<PdfDocument> output = new List<PdfDocument>();
             // split documents into separate pages
@@ -29,7 +31,7 @@ class Program
                 // Add the page and save it
                 outputDocument.AddPage(pdf.Pages[idx]);
                 output.Add(outputDocument);
-                outputDocument.Save(String.Format("./{0}/{0} - Page {1}.pdf", name, idx + 1));
+                outputDocument.Save(String.Format("./{0}/{1} - Page {2}.pdf", directoryName, name, idx + 1));
             }
         }
     }
